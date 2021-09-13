@@ -14,8 +14,10 @@ energy demand
 and the mix of supply
 from renewable
 and non-renewable sources.
-Greta helps you to run your code
-only when carbon intensity is low.
+Greta provides function decorators
+which allow you to set a carbon intensity threshold
+below which the given function
+should not run.
 
 N.b. Greta currently only works for the UK.
 If you know of carbon intensity APIs
@@ -25,7 +27,24 @@ or a pull request.
 
 ## How to use
 
+### Examples
+
+```Python
+from greta import check_intensity
+
+@check_intensity(limit="low")
+def my_intensive_function():
+    pass
+
+# Will only run if intensity is "low" or "very low"
+# Otherwise will raise greta.CarbonIntensityError
+my_intensive_function()
+```
+
 ### Setup
+
+_Project has not yet been deployed to PyPi.
+Package can instead by installed from this github._
 
 - Developed in python 3.9,
 but similar Python versions should work
