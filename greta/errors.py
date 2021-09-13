@@ -1,0 +1,2 @@
+class CarbonIntensityError(RuntimeError):
+    pass
