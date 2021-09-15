@@ -1,31 +1,30 @@
 name: Python CI
 
-on: push
+on: [push]
 
 jobs:
-    build:
+  build:
+
     runs-on: ubuntu-latest
     strategy:
       matrix:
         python-version: [3.7, 3.8, 3.9]
+
     steps:
       - uses: actions/checkout@v2
-
-      - name: Setup Python ${{ matrix.python-version }}
+      - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v2
         with:
           python-version: ${{ matrix.python-version }}
-          architecture: x64
-
       - name: Install dependencies
         run: |
-        pip install -r requirements.txt
-        pip install -r requirements-dev.txt
-
-      - name: Check code format
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install -r requirements-dev.txt
+      - name: Format code
         run: |
-        black . --check --verbose
-        isort . -c
-
-      - name: Run unit tests
-        run: pytest
+          black . --check --verbose
+          isort . -c
+      - name: Unit test
+        run: |
+          pytest
