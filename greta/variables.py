@@ -32,7 +32,8 @@ def condition_variable(low_value, high_value, limit: str):
     limit_enum = str_to_intensity_enum(limit)
     carbon_intensity_index = get_current_intensity()
 
-    if limit_enum.value <= carbon_intensity_index.value:
+    print(limit_enum, carbon_intensity_index)
+    if carbon_intensity_index.value <= limit_enum.value:
         return low_value
     else:
         return high_value
