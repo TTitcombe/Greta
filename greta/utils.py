@@ -22,10 +22,10 @@ def str_to_intensity_enum(str_intensity: str) -> IntensityIndex:
         'very low', 'low', 'moderate', 'high', 'very high'
 
     """
-    if limit not in intensity_indices:
+    if str_intensity not in intensity_indices:
         raise ValueError(
-            f"{limit} is not a valid carbon intensity index."
+            f"{str_intensity} is not a valid carbon intensity index."
             "Must be one of 'very low', 'low', 'moderate', 'high', 'very high'"
         )
 
-    return intensity_indices[limit]
+    return intensity_indices[str_intensity]
