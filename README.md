@@ -30,11 +30,11 @@ or a pull request.
 ### Examples
 
 ```Python
-from greta import check_intensity
+from greta import check_intensity, condition_variable
 
 @check_intensity(limit="low")
 def my_intensive_function():
-    pass
+    n_loops = condition_variable(50, 100, "very low")
 
 # Will only run if intensity is "low" or "very low"
 # Otherwise will raise greta.CarbonIntensityError
