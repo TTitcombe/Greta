@@ -3,6 +3,7 @@ Check carbon intensity before running code
 """
 from .errors import CarbonIntensityError
 from .query import get_current_intensity, intensity_indices
+from .utils import str_to_intensity_enum
 
 
 def check_intensity(limit: str):
@@ -17,22 +18,15 @@ def check_intensity(limit: str):
     ----------
     limit : str
         The maximum carbon intensity index under which the code should run
-        (inclusive). Must be one of 'very low', 'low', 'moderate', 'high', 'very high'
+        (inclusive).
+        Must be one of 'very low', 'low', 'moderate', 'high', 'very high'
 
     Raises
     ------
-    ValueError
-        If `limit` is not one of the allowed carbon intensity indices
     greta.CarbonIntensityError
         If carbon intensity index is greater than `limit` upon function execution
     """
-    if limit not in intensity_indices:
-        raise ValueError(
-            f"{limit} is not a valid carbon intensity index."
-            "Must be one of 'very low', 'low', 'moderate', 'high', 'very high'"
-        )
-
-    limit_enum = intensity_indices[limit]
+    limit_enum = str_to_intensity_enum(limit)
 
     def outer_func(func):
         def inner_func(*args, **kwargs):
