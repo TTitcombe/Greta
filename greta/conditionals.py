@@ -40,7 +40,9 @@ def condition_variable(low_value, high_value, limit: str):
         return high_value
 
 
-def condition_function(low_func: Callable, high_func: Callable, limit: str, *args, **kwargs):
+def condition_function(
+    low_func: Callable, high_func: Callable, limit: str, *args, **kwargs
+):
     """
     Run a particular function based on carbon intensity
 
