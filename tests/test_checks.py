@@ -47,3 +47,46 @@ class TestIntensityCheckError:
 
         with pytest.raises(CarbonIntensityError):
             self.inner_test()
+
+
+class TestIntensityCheckSkip:
+    @intensity_check_skip("low")
+    def inner_func(self):
+        return 42
+
+    @responses.activate
+    def test_code_runs_if_below_threshold_intensity(self):
+        responses.add(
+            responses.GET,
+            "https://api.carbonintensity.org.uk/intensity",
+            json={"data": [{"intensity": {"index": "very low"}}]},
+            status=200,
+        )
+
+        actual_result = self.inner_func()
+        assert actual_result == 42
+
+    @responses.activate
+    def test_code_runs_if_at_threshold_intensity(self):
+        responses.add(
+            responses.GET,
+            "https://api.carbonintensity.org.uk/intensity",
+            json={"data": [{"intensity": {"index": "low"}}]},
+            status=200,
+        )
+
+        actual_result = self.inner_func()
+        assert actual_result == 42
+
+    @responses.activate
+    @pytest.mark.parametrize("index", ["moderate", "high", "very high"])
+    def test_code_skips_if_above_threshold_intensity(self, index):
+        responses.add(
+            responses.GET,
+            "https://api.carbonintensity.org.uk/intensity",
+            json={"data": [{"intensity": {"index": index}}]},
+            status=200,
+        )
+
+        actual_result = self.inner_func()
+        assert actual_result is None
