@@ -2,6 +2,8 @@
 Altering variables and values
 conditional on carbon intensity
 """
+from typing import Callable
+
 from .query import get_current_intensity
 from .utils import str_to_intensity_enum
 
@@ -32,8 +34,38 @@ def condition_variable(low_value, high_value, limit: str):
     limit_enum = str_to_intensity_enum(limit)
     carbon_intensity_index = get_current_intensity()
 
-    print(limit_enum, carbon_intensity_index)
     if carbon_intensity_index.value <= limit_enum.value:
         return low_value
     else:
         return high_value
+
+
+def condition_function(
+    low_func: Callable, high_func: Callable, limit: str, *args, **kwargs
+):
+    """
+    Run a particular function based on carbon intensity
+
+    Given two functions (one to be run at low intensity and one at high),
+    select which one to execute at runtime based on the current
+    carbon intensity
+
+    Parameters
+    ----------
+    low_func : function
+        Function to be executed if intensity is at or below `limit`
+    high_func : function
+        Function to be executed if intensity is above `limit`
+    limit : str
+        The carbon intensity on which the values are conditioned
+    *args
+        args for the functions
+    **kwargs
+        kwargs for the functions
+    """
+    limit_enum = str_to_intensity_enum(limit)
+    carbon_intensity_index = get_current_intensity()
+
+    func = low_func if carbon_intensity_index.value <= limit_enum.value else high_func
+
+    return func(*args, **kwargs)
