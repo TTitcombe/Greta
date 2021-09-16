@@ -30,9 +30,9 @@ or a pull request.
 ### Examples
 
 ```Python
-from greta import check_intensity, condition_variable
+from greta import condition_variable, intensity_check_error
 
-@check_intensity(limit="low")
+@intensity_check_error(limit="low")
 def my_intensive_function():
     n_loops = condition_variable(50, 100, "very low")
 
