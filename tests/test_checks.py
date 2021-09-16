@@ -4,11 +4,11 @@ Unit tests for greta/checks.py
 import pytest
 import responses
 
-from greta import check_intensity
+from greta import intensity_check_error
 from greta.errors import CarbonIntensityError
 
 
-@check_intensity("low")
+@intensity_check_error("low")
 def inner_test():
     return "has run"
 

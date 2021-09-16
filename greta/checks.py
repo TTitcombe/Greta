@@ -6,7 +6,7 @@ from .query import get_current_intensity, intensity_indices
 from .utils import str_to_intensity_enum
 
 
-def check_intensity(limit: str):
+def intensity_check_error(limit: str):
     """
     Check carbon intensity before running code.
 
