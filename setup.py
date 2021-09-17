@@ -7,5 +7,5 @@ setup(
     description="A library for green computing: execute code at low carbon intensity",
     author="Tom Titcombe",
     license="GPL-3",
-    install_requires= ["requests"],
+    install_requires=["requests"],
 )
