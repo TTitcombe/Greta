@@ -1,7 +1,9 @@
 # Greta
 
+:seedling:
 Python library for Green Computing:
 Execute code at low carbon intensity.
+:seedling:
 
 Green computing is a set of principles to develop software
 which is as good for the environment
@@ -15,9 +17,16 @@ and the mix of supply
 from renewable
 and non-renewable sources.
 Greta provides function decorators
-which allow you to set a carbon intensity threshold
-below which the given function
-should not run.
+and functions
+which change the behaviour of your code
+based on the carbon intensity:
+skip heavy functions,
+run more function iterations
+if the carbon intensity is low,
+and much,
+much more.
+The future is green
+with Greta.
 
 N.b. Greta currently only works for the UK.
 If you know of carbon intensity APIs
@@ -41,33 +50,30 @@ def my_intensive_function():
 my_intensive_function()
 ```
 
+Refer to the [changelog](./CHANGELOG.md)
+for the latest features.
+
 ### Setup
 
-_Project has not yet been deployed to PyPi.
-Package can instead by installed from this github._
+Available on PyPi,
+so run
 
-- Developed in python 3.9,
-but similar Python versions should work
-- Clone this repository
-- Run `pip install .`
-in terminal
+```Python
+pip install greta
+```
+
+to install.
 
 ## Contributing
 
 Pull requests,
 issues
 and feature requests are welcome!
-If you're making a pull request,
-please adhere to:
-
-- Black code formatting
-- isort import formatting
-- numpy-style docstrings
-- Type hints on functions and methods
-- Unit testing with PyTest
+Please refer to the [contributing guide](./CONTRIBUTING.md)
+for more information.
 
 ## License
 
-Distributed under GNU-3 license.
+Distributed under GNU GPL-3 license.
 Read the [license](./LICENSE)
 for full terms.
