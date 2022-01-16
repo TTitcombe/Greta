@@ -1,6 +1,6 @@
-name: Python CI
+name: Quick Test Job
 
-on: [push]
+on: [push, pull_request]
 
 jobs:
   build:
